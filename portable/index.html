@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+read -r -d '' files_to_download <<'EOF'
+http://download.virtualbox.org/virtualbox/5.1.18/VirtualBox-5.1.18-114002-OSX.dmg
+http://download.virtualbox.org/virtualbox/5.1.18/VirtualBox-5.1.18-114002-Win.exe
+https://github.com/boot2docker/boot2docker/releases/download/v17.04.0-ce/boot2docker.iso
+https://get.docker.com/builds/Darwin/x86_64/docker-17.04.0-ce.tgz
+https://get.docker.com/builds/Windows/x86_64/docker-17.04.0-ce.zip
+https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Darwin-x86_64
+https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Windows-x86_64.exe
+https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Darwin-x86_64
+https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Windows-x86_64.exe
+https://github.com/rprichard/winpty/releases/download/0.4.2/winpty-0.4.2-cygwin-2.6.1-ia32.tar.gz
+EOF
+
+while read -r file; do echo "Downloading $(basename ${file})..."; curl -fLO# "${file}"; done <<< "$files_to_download"
+
+echo "Pulling and saving Docksal system images..."
+fin docker pull docksal/dns:1.0
+fin docker pull docksal/ssh-agent:1.0
+fin docker pull docksal/vhost-proxy:1.0
+fin docker save docksal/dns:1.0 docksal/ssh-agent:1.0 docksal/vhost-proxy:1.0 -o docksal-system-images.tar
+echo "Pulling and saving Docksal default stack images..."
+fin docker pull docksal/web:1.0-apache2.2
+fin docker pull docksal/db:1.0-mysql-5.5
+fin docker pull docksal/cli:1.2-php7
+fin docker save docksal/web:1.0-apache2.2 docksal/db:1.0-mysql-5.5 docksal/cli:1.2-php7 -o docksal-default-images.tar
