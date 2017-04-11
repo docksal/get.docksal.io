@@ -11,6 +11,7 @@ https://github.com/docker/compose/releases/download/1.12.0/docker-compose-Window
 https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Darwin-x86_64
 https://github.com/docker/machine/releases/download/v0.10.0/docker-machine-Windows-x86_64.exe
 https://github.com/rprichard/winpty/releases/download/0.4.2/winpty-0.4.2-cygwin-2.6.1-ia32.tar.gz
+http://dl.bintray.com/tombujok/babun/babun-1.2.0-dist.zip
 EOF
 
 while read -r file; do echo "Downloading $(basename ${file})..."; curl -fLO# "${file}"; done <<< "$files_to_download"
