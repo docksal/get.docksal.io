@@ -3,5 +3,5 @@
 Install Docksal in one line
 
 ```
-curl -fsSL http://get.docksal.io | sh
+curl -L# get.docksal.io | sh
 ```
