@@ -1,5 +1,14 @@
 #!/usr/bin/env sh
 
+# Docker for Mac/Windows install mode support
+if [ "$DOCKER_NATIVE" = "1" ]; then
+	echo 'Enabling native mode (Docker for Mac/Windows)...'
+	# Add the switch to the global Docksal env file
+	mkdir -p ~/.docksal &&
+		touch ~/.docksal/docksal.env &&
+		echo 'DOCKER_NATIVE=1' >> ~/.docksal/docksal.env
+fi
+
 sudo mkdir -p /usr/local/bin &&
 	sudo curl -fsSL https://raw.githubusercontent.com/docksal/docksal/master/bin/fin -o /usr/local/bin/fin &&
 	sudo chmod +x /usr/local/bin/fin &&
