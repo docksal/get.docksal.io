@@ -90,19 +90,25 @@ pull ()
 	done <<< "$1"
 }
 
-echo_green "Downloading macOS dependencies"
-download "$deps_mac"
-echo_green "Downloading Windows dependencies"
-download "$deps_win"
-echo_green "Downloading common dependencies"
-download "$deps_common"
+# Allow skipping this step (curl -L get.docksal.io | SKIP_DEPS=1 sh)
+if [[ "$SKIP_DEPS" == "" ]]; then
+	echo_green "Downloading macOS dependencies"
+	download "$deps_mac"
+	echo_green "Downloading Windows dependencies"
+	download "$deps_win"
+	echo_green "Downloading common dependencies"
+	download "$deps_common"
+fi
 
-echo_green "Pulling Docksal system images..."
-pull "$images_system"
-echo_green "Pulling Docksal default stack images..."
-pull "$images_stack"
+# Allow skipping this step (curl -L get.docksal.io | SKIP_IMAGES=1 sh)
+if [[ "$SKIP_IMAGES" == "" ]]; then
+	echo_green "Pulling Docksal system images..."
+	pull "$images_system"
+	echo_green "Pulling Docksal default stack images..."
+	pull "$images_stack"
 
-echo_green "Saving Docksal system images..."
-fin docker save $(echo "$images_system" | tr '\n' ' ') -o docksal-system-images.tar
-echo_green "Saving Docksal default stack images..."
-fin docker save $(echo "$images_stack" | tr '\n' ' ') -o docksal-default-images.tar
+	echo_green "Saving Docksal system images..."
+	fin docker save $(echo "$images_system" | tr '\n' ' ') -o docksal-system-images.tar
+	echo_green "Saving Docksal default stack images..."
+	fin docker save $(echo "$images_stack" | tr '\n' ' ') -o docksal-default-images.tar
+fi
