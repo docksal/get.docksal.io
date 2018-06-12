@@ -28,7 +28,7 @@ if [ "$KATACODA" != "" ]; then
 fi
 
 # Allow installing a specific version
-DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
+export DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
 
 sudo mkdir -p /usr/local/bin &&
 	sudo curl -fsSL "https://raw.githubusercontent.com/docksal/docksal/${DOCKSAL_VERSION}/bin/fin" -o /usr/local/bin/fin &&
