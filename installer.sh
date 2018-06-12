@@ -1,7 +1,7 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Docker for Mac/Windows install mode support
-if [ "$DOCKER_NATIVE" != "" ]; then
+if [[ "$DOCKER_NATIVE" != "" ]]; then
 	echo 'Enabling native mode (Docker for Mac/Windows)...'
 	# Add the switch to the global docksal.env file
 	mkdir -p ~/.docksal &&
@@ -10,7 +10,7 @@ if [ "$DOCKER_NATIVE" != "" ]; then
 fi
 
 # Sandbox Server install mode support
-if [ "$CI" != "" ]; then
+if [[ "$CI" != "" ]]; then
 	echo 'Enabling Sandbox Server installation mode...'
 	# Add the switch to the global docksal.env file
 	mkdir -p ~/.docksal &&
@@ -19,7 +19,7 @@ if [ "$CI" != "" ]; then
 fi
 
 # Katacoda mode support
-if [ "$KATACODA" != "" ]; then
+if [[ "$KATACODA" != "" ]]; then
 	echo 'Enabling Katacoda installation mode...'
 	# Add the switch to the global docksal.env file
 	mkdir -p ~/.docksal &&
