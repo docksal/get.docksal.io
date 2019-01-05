@@ -31,7 +31,7 @@ fi
 export DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
 
 is_sudo_granted () {
-	echo | sudo -S ls >/dev/null 2>&1
+	echo | sudo -Sv >/dev/null 2>&1
 }
 
 if ! is_sudo_granted; then
