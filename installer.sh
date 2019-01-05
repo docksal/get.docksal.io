@@ -31,6 +31,9 @@ fi
 export DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
 
 is_sudo_granted () {
+	# -S tells sudo to read password from stdin, -v just does "sudo nothing"
+	# If sudo token is already generated this command will succeed
+	# If no token is vaid, this command will fail since echo feeds empty password into sudo
 	echo | sudo -Sv >/dev/null 2>&1
 }
 
