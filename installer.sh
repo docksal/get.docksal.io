@@ -30,6 +30,11 @@ fi
 # Allow installing a specific version
 export DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
 
+echo "ATTENTION: Installer requires administrative privileges to continue with Docksal setup."
+echo "           On macOS and Linux please enter your current user password,"
+echo "           in Ubuntu App for Windows 10 use Linux user password in this step."
+sleep 1
+
 sudo mkdir -p /usr/local/bin &&
 	sudo curl -fsSL "https://raw.githubusercontent.com/docksal/docksal/${DOCKSAL_VERSION}/bin/fin" -o /usr/local/bin/fin &&
 	sudo chmod +x /usr/local/bin/fin &&
