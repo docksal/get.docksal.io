@@ -30,6 +30,21 @@ fi
 # Allow installing a specific version
 export DOCKSAL_VERSION="${DOCKSAL_VERSION:-master}"
 
+is_sudo_granted () {
+	# -S tells sudo to read password from stdin, -v just does "sudo nothing"
+	# If sudo token is already generated this command will succeed
+	# If no token is vaid, this command will fail since echo feeds empty password into sudo
+	echo | sudo -Sv >/dev/null 2>&1
+}
+
+if ! is_sudo_granted; then
+	echo "ATTENTION: Installer requires administrative privileges to continue with Docksal setup."
+	echo "           On macOS and Linux please enter your current user password,"
+	echo "           in Ubuntu App for Windows 10 use Linux user password in this step."
+	echo "           For more information, see https://docs.docksal.io/getting-started/setup/."
+	sleep 1
+fi
+
 sudo mkdir -p /usr/local/bin &&
 	sudo curl -fsSL "https://raw.githubusercontent.com/docksal/docksal/${DOCKSAL_VERSION}/bin/fin" -o /usr/local/bin/fin &&
 	sudo chmod +x /usr/local/bin/fin &&
