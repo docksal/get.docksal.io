@@ -1,0 +1,27 @@
+# Production installer script
+[[redirects]]
+from = "https://get.docksal.io/"
+to = "https://raw.githubusercontent.com/docksal/get.docksal.io/master/installer.sh"
+status = 200
+force = true
+
+# Testing installer script
+[[redirects]]
+from = "https://test.docksal.io/"
+to = "https://raw.githubusercontent.com/docksal/get.docksal.io/develop/installer.sh"
+status = 200
+force = true
+
+# Production portable download helper script
+[[redirects]]
+from = "https://get.docksal.io/portable/"
+to = "https://raw.githubusercontent.com/docksal/get.docksal.io/master/portable/download.sh"
+status = 200
+force = true
+
+# Testing portable download helper script
+[[redirects]]
+from = "https://test.docksal.io/portable/"
+to = "https://raw.githubusercontent.com/docksal/get.docksal.io/develop/portable/download.sh"
+status = 200
+force = true
