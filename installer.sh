@@ -41,7 +41,7 @@ if ! is_sudo_granted; then
 	echo "ATTENTION: Installer requires administrative privileges to continue with Docksal setup."
 	echo "           On macOS and Linux please enter your current user password,"
 	echo "           in Ubuntu App for Windows 10 use Linux user password in this step."
-	echo "           For more information, see https://docs.docksal.io/getting-started/setup/"
+	echo "           For more information, see https://docs.docksal.io/getting-started/setup/#install"
 	sleep 1
 fi
 
