@@ -1,30 +1,33 @@
 #!/usr/bin/env bash
 
+set -e  # Fail on errors
+
+# Ensure config folder and file exist
+DOCKSAL_GLOBAL_CONFIG=~/.docksal/docksal.env
+mkdir -p $(dirname ${DOCKSAL_GLOBAL_CONFIG})
+touch ${DOCKSAL_GLOBAL_CONFIG}
+
+# Check whether a global variable has been already set
+is_conf_set () {
+	grep -q "$1" ${DOCKSAL_GLOBAL_CONFIG}
+}
+
 # Docker for Mac/Windows install mode support
-if [[ "$DOCKER_NATIVE" != "" ]]; then
+if [[ "$DOCKER_NATIVE" != "" ]] && ! is_conf_set "DOCKER_NATIVE"; then
 	echo 'Enabling native mode (Docker for Mac/Windows)...'
-	# Add the switch to the global docksal.env file
-	mkdir -p ~/.docksal &&
-		touch ~/.docksal/docksal.env &&
-		echo 'DOCKER_NATIVE=1' >> ~/.docksal/docksal.env
+	echo 'DOCKER_NATIVE=1' >> ${DOCKSAL_GLOBAL_CONFIG}
 fi
 
 # Sandbox Server install mode support
-if [[ "$CI" != "" ]]; then
+if [[ "$CI" != "" ]] && ! is_conf_set "CI"; then
 	echo 'Enabling Sandbox Server installation mode...'
-	# Add the switch to the global docksal.env file
-	mkdir -p ~/.docksal &&
-		touch ~/.docksal/docksal.env &&
-		echo 'CI=1' >> ~/.docksal/docksal.env
+	echo 'CI=1' >> ${DOCKSAL_GLOBAL_CONFIG}
 fi
 
 # Katacoda mode support
-if [[ "$KATACODA" != "" ]]; then
+if [[ "$KATACODA" != "" ]] && ! is_conf_set "KATACODA"; then
 	echo 'Enabling Katacoda installation mode...'
-	# Add the switch to the global docksal.env file
-	mkdir -p ~/.docksal &&
-		touch ~/.docksal/docksal.env &&
-		echo 'KATACODA=1' >> ~/.docksal/docksal.env
+	echo 'KATACODA=1' >> ${DOCKSAL_GLOBAL_CONFIG}
 fi
 
 # Allow installing a specific version
